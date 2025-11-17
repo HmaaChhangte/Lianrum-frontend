@@ -25,7 +25,7 @@ export default function SignInPage() {
         style={{
           width: "110px",
           marginBottom: "15px",
-          marginLeft: "-40px", // <-- move slightly left
+          marginLeft: "-40px",
           animation: "floaty 3s ease-in-out infinite",
         }}
       />
@@ -33,6 +33,14 @@ export default function SignInPage() {
       {/* 🎴 SIGN IN CARD */}
       <div style={{ width: "420px" }}>
         <SignIn
+          routing="path"
+          path="/sign-in"
+          signUpUrl="/sign-up"
+
+          // ⭐ REDIRECT FIX
+          afterSignInUrl="/dashboard"
+          fallbackRedirectUrl="/dashboard"
+
           appearance={{
             elements: {
               card: {
@@ -42,19 +50,16 @@ export default function SignInPage() {
                 padding: "20px",
                 background: "#fff7e6",
               },
-
               formFieldInput: {
                 borderRadius: "12px",
                 border: "2px dashed #f3b27a",
                 padding: "12px",
                 fontSize: "16px",
               },
-
               formFieldLabel: {
                 color: "#3f2b15",
                 fontWeight: "bold",
               },
-
               formButtonPrimary: {
                 backgroundColor: "#a0d74c",
                 color: "#3f2b15",
@@ -63,15 +68,11 @@ export default function SignInPage() {
                 padding: "12px",
                 fontWeight: "bold",
               },
-
               footerActionText: {
                 color: "#3f2b15",
               },
             },
           }}
-          routing="path"
-          path="/sign-in"
-          signUpUrl="/sign-up"
         />
       </div>
 

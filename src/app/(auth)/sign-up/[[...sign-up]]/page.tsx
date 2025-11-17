@@ -34,6 +34,14 @@ export default function SignUpPage() {
       {/* SIGN UP CARD */}
       <div style={{ width: "420px" }}>
         <SignUp
+          routing="path"
+          path="/sign-up"
+          signInUrl="/sign-in"
+
+          // ⭐ REDIRECT FIX
+          afterSignUpUrl="/dashboard"
+          fallbackRedirectUrl="/dashboard"
+
           appearance={{
             elements: {
               card: {
@@ -43,22 +51,16 @@ export default function SignUpPage() {
                 padding: "20px",
                 background: "#fff7e6",
               },
-
-              // DO NOT HIDE SOCIAL BUTTONS
-              // socialButtons: { display: "none" },
-
               formFieldInput: {
                 borderRadius: "12px",
                 border: "2px dashed #f3b27a",
                 padding: "12px",
                 fontSize: "16px",
               },
-
               formFieldLabel: {
                 color: "#3f2b15",
                 fontWeight: "bold",
               },
-
               formButtonPrimary: {
                 backgroundColor: "#a0d74c",
                 color: "#3f2b15",
@@ -67,26 +69,21 @@ export default function SignUpPage() {
                 padding: "12px",
                 fontWeight: "bold",
               },
-
               footerActionText: {
                 color: "#3f2b15",
               },
             },
           }}
-          path="/sign-up"
-          routing="path"
-          signInUrl="/sign-in"
-          afterSignUpUrl="/dashboard"
         />
       </div>
 
       <style>
         {`
-        @keyframes floaty {
-          0% { transform: translateY(0); }
-          50% { transform: translateY(-8px); }
-          100% { transform: translateY(0); }
-        }
+          @keyframes floaty {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+          }
         `}
       </style>
     </div>
