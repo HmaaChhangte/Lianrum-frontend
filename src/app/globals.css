@@ -395,3 +395,104 @@ body {
   60%  { transform: scale(1.06); }
   100% { transform: scale(1); }
 }
+/* ----------------------------------------------------
+   Transparent Frosted Top Bar for Diary Page
+----------------------------------------------------- */
+.diary-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.5);
+
+  border-bottom: 3px solid rgba(0,0,0,0.15);
+  z-index: 10000;
+}
+
+.diary-topbar-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #3f2b15;
+}
+
+/* Optional back button */
+.diary-back-btn {
+  position: absolute;
+  left: 16px;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+/* ----------------------------------------------------
+   Hamburger Menu
+----------------------------------------------------- */
+
+.hamburger-btn {
+  font-size: 32px;
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  cursor: pointer;
+  z-index: 11000;
+  user-select: none;
+  transition: transform 0.12s ease-out;
+}
+
+.hamburger-btn:active {
+  transform: scale(0.85);
+}
+
+/* Sidebar menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px; /* hidden */
+  width: 260px;
+  height: 100%;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  transition: right 0.3s ease;
+  z-index: 20000;
+  border-left: 3px solid rgba(0,0,0,0.15);
+}
+
+.side-menu.open {
+  right: 0; /* visible */
+}
+
+.menu-item {
+  font-size: 20px;
+  margin-bottom: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 0;
+  border-radius: 10px;
+  transition: transform 0.12s ease-out;
+}
+
+.menu-item:active {
+  transform: scale(0.92);
+}
+
+/* Background overlay when menu opens */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 15000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

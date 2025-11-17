@@ -1,25 +1,23 @@
 "use client";
 import { useState, useEffect } from "react";
 import { apiGet, apiPost, apiUpload, API_BASE } from "@/lib/api";
+import { SignOutButton } from "@clerk/nextjs";
 
 export default function DiaryPage() {
   const [openEditor, setOpenEditor] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [note, setNote] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [entries, setEntries] = useState([]);
 
-  // Load entries from backend
   useEffect(() => {
     apiGet("/entries").then((data) => setEntries(data));
   }, []);
 
-  // Cute button animation
   const animateButton = (e) => {
     const btn = e.target;
     btn.classList.remove("released");
-
-    // Add bounce after shrink animation
     setTimeout(() => btn.classList.add("released"), 10);
   };
 
@@ -36,11 +34,9 @@ export default function DiaryPage() {
 
     let imageUrl = null;
 
-    // Upload image if selected
     if (imageFile) {
       const formData = new FormData();
       formData.append("image", imageFile);
-
       const uploadData = await apiUpload("/upload", formData);
       imageUrl = uploadData.imageUrl;
     }
@@ -62,13 +58,37 @@ export default function DiaryPage() {
 
   return (
     <div className="diary2-container">
+
+      {/* 🔥 Transparent Top Bar */}
+      <div className="diary-topbar">
+        <div
+          className="diary-back-btn kawaii-btn"
+          onClick={() => (window.location.href = "/")}
+        >
+          ←
+        </div>
+
+        <div className="diary-topbar-title">My Family Diary</div>
+
+        {/* 🔥 Hamburger Button */}
+        <div
+          className="hamburger-btn"
+          onClick={() => setMenuOpen(true)}
+        >
+          ☰
+        </div>
+      </div>
+
+      {/* Push content down */}
+      <div style={{ height: "70px" }}></div>
+
       <div className="diary2-title">
         Chhungkaw tan thu hanhnutchhiah teh le
       </div>
 
-      {/* Button to open editor */}
+      {/* Open Editor Button */}
       <button
-        className="diary-image-btn"
+        className="diary-image-btn kawaii-btn"
         onClick={(e) => {
           animateButton(e);
           setOpenEditor(true);
@@ -77,7 +97,7 @@ export default function DiaryPage() {
         <img src="/diarybutton.png" alt="Ziak Rawh" />
       </button>
 
-      {/* Entries list */}
+      {/* Diary Entries */}
       <div className="diary-list">
         {entries.map((item, index) => (
           <div key={index} className="diary-card">
@@ -90,18 +110,13 @@ export default function DiaryPage() {
               className="delete-btn kawaii-btn"
               onClick={async (e) => {
                 animateButton(e);
-
                 const btn = e.target;
                 btn.classList.add("shake");
                 btn.classList.add("glow");
 
                 setTimeout(async () => {
-                  await fetch(`${API_BASE}/entries/${index}`, {
-                    method: "DELETE",
-                  });
-
+                  await fetch(`${API_BASE}/entries/${index}`, { method: "DELETE" });
                   setEntries(entries.filter((_, i) => i !== index));
-
                   btn.classList.remove("shake");
                   btn.classList.remove("glow");
                 }, 350);
@@ -113,7 +128,25 @@ export default function DiaryPage() {
         ))}
       </div>
 
-      {/* Editor modal */}
+      {/* 🔥 SIDE MENU */}
+      {menuOpen && <div className="menu-overlay" onClick={() => setMenuOpen(false)}></div>}
+
+      <div className={`side-menu ${menuOpen ? "open" : ""}`}>
+        <div className="menu-item kawaii-btn" onClick={() => (window.location.href = "/dashboard")}>
+          🏠 Dashboard
+        </div>
+
+        <div className="menu-item kawaii-btn" onClick={() => (window.location.href = "/diary")}>
+          📔 Diary
+        </div>
+
+        <div className="menu-item kawaii-btn">
+          <SignOutButton>🚪 Logout</SignOutButton>
+        </div>
+      </div>
+
+
+      {/* Editor Modal */}
       {openEditor && (
         <div className="editor-modal">
           <div className="editor-box">
@@ -134,10 +167,7 @@ export default function DiaryPage() {
                 <span>No image selected.</span>
               )}
 
-              <label
-                className="upload-btn kawaii-btn"
-                onClick={animateButton}
-              >
+              <label className="upload-btn kawaii-btn" onClick={animateButton}>
                 Upload Photo
                 <input
                   type="file"
