@@ -58,13 +58,11 @@ export default function DiaryPage() {
 
   return (
     <div className="diary2-container">
-
-      {/* 🔥 Transparent Top Bar */}
+      {/* TOP BAR */}
       <div className="diary-topbar">
-        
         <div className="diary-topbar-title">Chhungkaw thawnthu</div>
 
-        {/* 🔥 Hamburger Button */}
+        {/* HAMBURGER BUTTON */}
         <div
           className="hamburger-btn"
           onClick={() => setMenuOpen(true)}
@@ -73,14 +71,14 @@ export default function DiaryPage() {
         </div>
       </div>
 
-      {/* Push content down */}
+      {/* PUSH CONTENT DOWN */}
       <div style={{ height: "70px" }}></div>
 
       <div className="diary2-title">
         Chhungkaw tan thu hanhnutchhiah teh le
       </div>
 
-      {/* Open Editor Button */}
+      {/* OPEN EDITOR BUTTON */}
       <button
         className="diary-image-btn kawaii-btn"
         onClick={(e) => {
@@ -91,7 +89,7 @@ export default function DiaryPage() {
         <img src="/diarybutton.png" alt="Ziak Rawh" />
       </button>
 
-      {/* Diary Entries */}
+      {/* ENTRIES */}
       <div className="diary-list">
         {entries.map((item, index) => (
           <div key={index} className="diary-card">
@@ -109,7 +107,9 @@ export default function DiaryPage() {
                 btn.classList.add("glow");
 
                 setTimeout(async () => {
-                  await fetch(`${API_BASE}/entries/${index}`, { method: "DELETE" });
+                  await fetch(`${API_BASE}/entries/${index}`, {
+                    method: "DELETE",
+                  });
                   setEntries(entries.filter((_, i) => i !== index));
                   btn.classList.remove("shake");
                   btn.classList.remove("glow");
@@ -122,25 +122,91 @@ export default function DiaryPage() {
         ))}
       </div>
 
-      {/* 🔥 SIDE MENU */}
-      {menuOpen && <div className="menu-overlay" onClick={() => setMenuOpen(false)}></div>}
+      {/* OVERLAY WHEN MENU OPEN */}
+      {menuOpen && (
+        <div
+          className="menu-overlay"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            height: "100vh",
+            width: "100vw",
+            background: "rgba(0,0,0,0.4)",
+            zIndex: 999,
+          }}
+        ></div>
+      )}
 
-      <div className={`side-menu ${menuOpen ? "open" : ""}`}>
-        <div className="menu-item kawaii-btn" onClick={() => (window.location.href = "/dashboard")}>
-          🏠 Dashboard
+      {/* ⭐ FLOATING CARD MENU */}
+      {menuOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: "120px",
+            right: "20px",
+            background: "#fff7e6",
+            border: "4px solid #be8b5f",
+            borderRadius: "20px",
+            padding: "20px",
+            width: "200px",
+            zIndex: 1000,
+            boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+          }}
+        >
+          <div
+            className="menu-item kawaii-btn"
+            style={{
+              textAlign: "center",
+              marginBottom: "12px",
+              padding: "10px",
+              border: "2px solid #3f2b15",
+              borderRadius: "12px",
+              background: "#d8f7a5",
+              fontWeight: "bold",
+            }}
+            onClick={() => (window.location.href = "/dashboard")}
+          >
+            🏠 Dashboard
+          </div>
+
+          <div
+            className="menu-item kawaii-btn"
+            style={{
+              textAlign: "center",
+              marginBottom: "12px",
+              padding: "10px",
+              border: "2px solid #3f2b15",
+              borderRadius: "12px",
+              background: "#f3d49a",
+              fontWeight: "bold",
+            }}
+            onClick={() => (window.location.href = "/diary")}
+          >
+            📔 Diary
+          </div>
+
+          <SignOutButton>
+            <button
+              className="kawaii-btn"
+              style={{
+                width: "100%",
+                padding: "10px",
+                border: "2px solid #3f2b15",
+                borderRadius: "12px",
+                background: "#ff6b6b",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              🚪 Logout
+            </button>
+          </SignOutButton>
         </div>
+      )}
 
-        <div className="menu-item kawaii-btn" onClick={() => (window.location.href = "/diary")}>
-          📔 Diary
-        </div>
-
-        <div className="menu-item kawaii-btn">
-          <SignOutButton>🚪 Logout</SignOutButton>
-        </div>
-      </div>
-
-
-      {/* Editor Modal */}
+      {/* EDITOR MODAL */}
       {openEditor && (
         <div className="editor-modal">
           <div className="editor-box">
