@@ -71,8 +71,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* 🌳 FAMILY TREE BUTTON */}
-          <a href="/family" className="image-btn">
+          {/* 🌳 FIXED: FAMILY TREE BUTTON → /family-tree */}
+          <a href="/family-tree" className="image-btn">
             <img
               src="/familytreebutton.png"
               alt="Family Tree"
@@ -101,8 +101,8 @@ export default function Home() {
             />
           </a>
 
-          {/* ➕ ADD MEMBER BUTTON */}
-          
+          {/* ➕ ADD MEMBER (coming soon?) */}
+
         </div>
       </div>
     </div>
