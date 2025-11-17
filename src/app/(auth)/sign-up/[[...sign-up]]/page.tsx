@@ -12,39 +12,41 @@ export default function SignUpPage() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        padding: "20px", // mobile safe padding
         backgroundImage: "url('/bg-sky.png')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        paddingTop: "40px",
       }}
     >
-      {/* 🐿️ Squirrel above the card */}
+      {/* 🐿️ SQUIRREL */}
       <img
         src="/squirrel.png"
         alt="squirrel"
         style={{
           width: "110px",
           marginBottom: "15px",
-          marginLeft: "-40px",
           animation: "floaty 3s ease-in-out infinite",
         }}
       />
 
-      {/* SIGN UP CARD */}
-      <div style={{ width: "420px" }}>
+      {/* SIGN-UP CARD */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "420px", // RESPONSIVE + CENTER
+        }}
+      >
         <SignUp
           routing="path"
           path="/sign-up"
           signInUrl="/sign-in"
-
-          // ⭐ REDIRECT FIX
           afterSignUpUrl="/dashboard"
           fallbackRedirectUrl="/dashboard"
-
           appearance={{
             elements: {
               card: {
+                width: "100%", // FIX CARD ALIGNMENT
                 borderRadius: "20px",
                 border: "4px solid #be8b5f",
                 boxShadow: "0 10px 25px rgba(0,0,0,0.15)",

@@ -12,38 +12,41 @@ export default function SignInPage() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        padding: "20px", // mobile padding
         backgroundImage: "url('/bg-sky.png')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
     >
-      {/* 🐿️ SQUIRREL ABOVE CARD */}
+      {/* 🐿️ SQUIRREL */}
       <img
         src="/squirrel.png"
         alt="squirrel"
         style={{
           width: "110px",
           marginBottom: "15px",
-          marginLeft: "-40px",
           animation: "floaty 3s ease-in-out infinite",
         }}
       />
 
-      {/* 🎴 SIGN IN CARD */}
-      <div style={{ width: "420px" }}>
+      {/* 🎴 CENTERED SIGN-IN CARD */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "420px", // FIX FOR MOBILE CENTER
+        }}
+      >
         <SignIn
           routing="path"
           path="/sign-in"
           signUpUrl="/sign-up"
-
-          // ⭐ REDIRECT FIX
           afterSignInUrl="/dashboard"
           fallbackRedirectUrl="/dashboard"
-
           appearance={{
             elements: {
               card: {
+                width: "100%", // responsive + center
                 borderRadius: "20px",
                 border: "4px solid #be8b5f",
                 boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
@@ -76,7 +79,6 @@ export default function SignInPage() {
         />
       </div>
 
-      {/* FLOAT ANIMATION */}
       <style>
         {`
         @keyframes floaty {
