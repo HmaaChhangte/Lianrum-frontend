@@ -146,9 +146,9 @@ body {
    DIARY PAGE BACKGROUND
 ----------------------------------------------------- */
 .diary2-container {
-  background-image: url('/diarybg.png');
-  background-size: contain;
-  background-position: center top;
+  background-image: url('/bg-sky.png');
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 
   min-height: 100vh;
@@ -495,4 +495,43 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+/* ----------------------------------------------------
+   FIX CLERK SIGN-IN / SIGN-UP MOBILE PAGE ALIGNMENT
+----------------------------------------------------- */
+
+/* Force Clerk container full width and center */
+.cl-in {
+  display: flex !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+/* Clerk card should be centered and responsive */
+.cl-card {
+  margin: 0 auto !important;
+  border-radius: 25px !important;
+  border: 4px solid #d2b48c !important;
+  width: 92% !important;      /* fit nicely on mobile */
+  max-width: 420px !important;
+  background: #fff7ea !important;
+}
+
+/* Small padding inside the card */
+.cl-card > div {
+  padding: 0 14px !important;
+}
+
+/* Fix Google button stretch */
+.cl-socialButtonsIconButton,
+.cl-socialButtonsBlockButton {
+  width: 100% !important;
+  border-radius: 16px !important;
+}
+
+/* Remove outer left margins Clerk adds */
+.cl-internal-b3fm6y,
+.cl-internal-11ttlho {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }

@@ -62,7 +62,7 @@ export default function DiaryPage() {
       {/* 🔥 Transparent Top Bar */}
       <div className="diary-topbar">
         
-        <div className="diary-topbar-title">My Family Diary</div>
+        <div className="diary-topbar-title">Chhungkaw thawnthu</div>
 
         {/* 🔥 Hamburger Button */}
         <div
