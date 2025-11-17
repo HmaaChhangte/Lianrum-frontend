@@ -172,20 +172,21 @@ export default function DiaryPage() {
           </div>
 
           <div
-            className="menu-item kawaii-btn"
-            style={{
-              textAlign: "center",
-              marginBottom: "12px",
-              padding: "10px",
-              border: "2px solid #3f2b15",
-              borderRadius: "12px",
-              background: "#f3d49a",
-              fontWeight: "bold",
-            }}
-            onClick={() => (window.location.href = "/diary")}
-          >
-            📔 Diary
-          </div>
+  className="menu-item kawaii-btn"
+  style={{
+    textAlign: "center",
+    marginBottom: "12px",
+    padding: "10px",
+    border: "2px solid #3f2b15",
+    borderRadius: "12px",
+    background: "#c8e6ff",
+    fontWeight: "bold",
+  }}
+  onClick={() => (menuOpen = false, window.location.href = "/family-tree")}
+>
+  🌳 Family Tree
+</div>
+
 
           <SignOutButton>
             <button
