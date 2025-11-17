@@ -61,13 +61,7 @@ export default function DiaryPage() {
 
       {/* 🔥 Transparent Top Bar */}
       <div className="diary-topbar">
-        <div
-          className="diary-back-btn kawaii-btn"
-          onClick={() => (window.location.href = "/")}
-        >
-          ←
-        </div>
-
+        
         <div className="diary-topbar-title">My Family Diary</div>
 
         {/* 🔥 Hamburger Button */}
