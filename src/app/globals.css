@@ -373,3 +373,25 @@ body {
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
 }
+/* ----------------------------------------------------
+   CUTE BUTTON PRESS ANIMATION (Shrink on tap)
+----------------------------------------------------- */
+
+.kawaii-btn {
+  transition: transform 0.12s ease-out;
+}
+
+.kawaii-btn:active {
+  transform: scale(0.92);
+}
+
+/* Optional: bounce when released */
+.kawaii-btn.released {
+  animation: kawaiiBounce 0.25s ease-out;
+}
+
+@keyframes kawaiiBounce {
+  0%   { transform: scale(0.92); }
+  60%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}

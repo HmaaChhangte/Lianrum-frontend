@@ -14,6 +14,15 @@ export default function DiaryPage() {
     apiGet("/entries").then((data) => setEntries(data));
   }, []);
 
+  // Cute button animation
+  const animateButton = (e) => {
+    const btn = e.target;
+    btn.classList.remove("released");
+
+    // Add bounce after shrink animation
+    setTimeout(() => btn.classList.add("released"), 10);
+  };
+
   const handleImagePick = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -27,7 +36,7 @@ export default function DiaryPage() {
 
     let imageUrl = null;
 
-    // upload image first
+    // Upload image if selected
     if (imageFile) {
       const formData = new FormData();
       formData.append("image", imageFile);
@@ -58,7 +67,13 @@ export default function DiaryPage() {
       </div>
 
       {/* Button to open editor */}
-      <button className="diary-image-btn" onClick={() => setOpenEditor(true)}>
+      <button
+        className="diary-image-btn"
+        onClick={(e) => {
+          animateButton(e);
+          setOpenEditor(true);
+        }}
+      >
         <img src="/diarybutton.png" alt="Ziak Rawh" />
       </button>
 
@@ -72,8 +87,10 @@ export default function DiaryPage() {
             <div className="card-time">{item.time}</div>
 
             <button
-              className="delete-btn"
+              className="delete-btn kawaii-btn"
               onClick={async (e) => {
+                animateButton(e);
+
                 const btn = e.target;
                 btn.classList.add("shake");
                 btn.classList.add("glow");
@@ -117,7 +134,10 @@ export default function DiaryPage() {
                 <span>No image selected.</span>
               )}
 
-              <label className="upload-btn kawaii-btn">
+              <label
+                className="upload-btn kawaii-btn"
+                onClick={animateButton}
+              >
                 Upload Photo
                 <input
                   type="file"
@@ -128,13 +148,22 @@ export default function DiaryPage() {
               </label>
             </div>
 
-            <button className="save-btn kawaii-btn" onClick={saveMemory}>
+            <button
+              className="save-btn kawaii-btn"
+              onClick={(e) => {
+                animateButton(e);
+                saveMemory();
+              }}
+            >
               🍃 Save Memory
             </button>
 
             <button
               className="close-btn kawaii-btn"
-              onClick={() => setOpenEditor(false)}
+              onClick={(e) => {
+                animateButton(e);
+                setOpenEditor(false);
+              }}
             >
               ❌ Close
             </button>
