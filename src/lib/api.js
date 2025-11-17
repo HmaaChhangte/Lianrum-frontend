@@ -7,10 +7,11 @@ const isLocalhost = isBrowser && (
   window.location.hostname === "127.0.0.1"
 );
 
-// Local backend for dev, Render backend for Vercel
+// *** FIX: Always fallback to your Render backend ***
 export const API_BASE = isLocalhost
   ? "http://localhost:3001"
-  : process.env.NEXT_PUBLIC_BACKEND_URL;
+  : (process.env.NEXT_PUBLIC_BACKEND_URL ||
+     "https://lianrum-backend.onrender.com");
 
 console.log("🚀 Using API:", API_BASE);
 
