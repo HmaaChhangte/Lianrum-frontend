@@ -1,27 +1,26 @@
-// FRONTEND → BACKEND URL SELECTOR
-function getAPIBase() {
-  // If frontend is running on localhost → always use Render backend
-  if (typeof window !== "undefined") {
-    if (window.location.hostname === "localhost") {
-      return "https://lianrum-backend.onrender.com";
-    }
-  }
+"use client";
 
-  // If frontend is deployed later on Vercel → also use Render backend
-  return "https://lianrum-backend.onrender.com";
-}
+// Detect local development vs production
+const isBrowser = typeof window !== "undefined";
+const isLocalhost = isBrowser && (
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+);
 
-export const API_BASE = getAPIBase();
-console.log("🔥 Using API Base:", API_BASE);
+// Local backend for dev, Render backend for Vercel
+export const API_BASE = isLocalhost
+  ? "http://localhost:3001"
+  : process.env.NEXT_PUBLIC_BACKEND_URL;
 
+console.log("🚀 Using API:", API_BASE);
 
-// NORMAL GET
+// GET
 export async function apiGet(path) {
   const res = await fetch(API_BASE + path);
   return res.json();
 }
 
-// NORMAL POST
+// POST
 export async function apiPost(path, data) {
   const res = await fetch(API_BASE + path, {
     method: "POST",
@@ -31,7 +30,7 @@ export async function apiPost(path, data) {
   return res.json();
 }
 
-// FILE UPLOAD
+// UPLOAD
 export async function apiUpload(path, formData) {
   const res = await fetch(API_BASE + path, {
     method: "POST",
