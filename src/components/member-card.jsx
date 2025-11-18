@@ -16,7 +16,7 @@ export default function MemberCard({
         top: styleOverride.y,
         transform: "translate(-50%, -50%)",
       }}
-      className="relative w-[260px] h-[350px] rounded-[30px] overflow-hidden shadow-xl border-[4px] border-white"
+      className="relative w-[250px] h-[330px] rounded-[30px] overflow-hidden shadow-xl border-[4px] border-white"
     >
       {/* Background */}
       <div
@@ -24,34 +24,35 @@ export default function MemberCard({
         style={{
           backgroundImage: "url('/member-card-bg.png')",
         }}
-      ></div>
+      />
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-white/5"></div>
+      {/* Soft overlay */}
+      <div className="absolute inset-0 bg-white/10" />
 
       {/* TOP SECTION */}
       <div className="relative z-10 h-[55%] w-full flex justify-center items-center pt-4">
         <div
           className="
-            w-28 h-28 
+            w-24 h-24 
             rounded-full 
             bg-[#FBECD2] 
-            border-[7px] border-[#5B412F]
+            border-[6px] border-[#5B412F]
             shadow-md 
             overflow-hidden
+            flex items-center justify-center
           "
         >
           <img
             src={photoUrl || "/silhouette.png"}
             alt="avatar"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain p-2"
           />
         </div>
       </div>
 
       {/* BOTTOM SECTION */}
       <div className="relative z-10 h-[45%] w-full bg-[#8EB590]/90 flex flex-col items-center justify-center px-2">
-        <p className="font-[Fredoka] text-2xl text-[#4A3628] font-semibold tracking-wide text-center px-4">
+        <p className="font-[Fredoka] text-xl text-[#4A3628] font-semibold tracking-wide text-center px-4">
           {name}
         </p>
 
@@ -63,12 +64,12 @@ export default function MemberCard({
           }}
           className="
             mt-3 
-            w-12 h-12 
+            w-10 h-10 
             rounded-full 
             bg-[#4CD137] 
             shadow-md
             flex items-center justify-center
-            text-white text-4xl
+            text-white text-3xl
             font-bold
             btn-bounce
           "
