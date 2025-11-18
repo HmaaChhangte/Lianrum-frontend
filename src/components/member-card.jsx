@@ -16,27 +16,33 @@ export default function MemberCard({
         top: styleOverride.y,
         transform: "translate(-50%, -50%)",
       }}
-      className="relative w-[250px] h-[330px] rounded-[30px] overflow-hidden shadow-xl border-[4px] border-white"
+      className="
+        relative 
+        w-[240px] 
+        h-[360px] 
+        rounded-[30px] 
+        overflow-hidden 
+        shadow-xl 
+        border-[4px] border-white
+      "
     >
-      {/* Background */}
+      {/* FULL BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/member-card-bg.png')",
+          backgroundSize: "cover",
         }}
       />
 
-      {/* Soft overlay */}
-      <div className="absolute inset-0 bg-white/10" />
-
-      {/* TOP SECTION */}
+      {/* TOP SECTION (Avatar) */}
       <div className="relative z-10 h-[55%] w-full flex justify-center items-center pt-4">
         <div
           className="
-            w-24 h-24 
+            w-28 h-28 
             rounded-full 
             bg-[#FBECD2] 
-            border-[6px] border-[#5B412F]
+            border-[7px] border-[#5B412F]
             shadow-md 
             overflow-hidden
             flex items-center justify-center
@@ -50,13 +56,22 @@ export default function MemberCard({
         </div>
       </div>
 
-      {/* BOTTOM SECTION */}
-      <div className="relative z-10 h-[45%] w-full bg-[#8EB590]/90 flex flex-col items-center justify-center px-2">
-        <p className="font-[Fredoka] text-xl text-[#4A3628] font-semibold tracking-wide text-center px-4">
+      {/* BOTTOM SECTION (Green area + text + button) */}
+      <div
+        className="
+          relative 
+          z-10 
+          h-[45%] w-full 
+          bg-[#8EB590]/90 
+          flex flex-col items-center justify-center 
+          px-2
+        "
+      >
+        <p className="font-[Fredoka] text-2xl text-[#4A3628] font-semibold tracking-wide text-center px-4">
           {name}
         </p>
 
-        {/* Green Add Button */}
+        {/* Add Button */}
         <button
           onClick={() => {
             if (isCouple) onAddChild();
@@ -64,7 +79,7 @@ export default function MemberCard({
           }}
           className="
             mt-3 
-            w-10 h-10 
+            w-12 h-12 
             rounded-full 
             bg-[#4CD137] 
             shadow-md
