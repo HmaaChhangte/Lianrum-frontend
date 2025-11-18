@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 
 export default function MemberCard({
   name,
@@ -51,12 +50,11 @@ export default function MemberCard({
 
       {/* BOTTOM SECTION */}
       <div className="h-[45%] w-full bg-[#8EB590] bg-opacity-90 flex flex-col items-center justify-center">
-        <p className="font-[Fredoka] text-xl text-[#4A3628] font-semibold tracking-wide">
+        <p className="font-[Fredoka] text-xl text-[#4A3628] font-semibold tracking-wide text-center px-2">
           {name}
         </p>
 
-        <motion.button
-          whileTap={{ scale: 0.7 }}
+        <button
           onClick={() => {
             if (isCouple) onAddChild();
             else onAddSpouse();
@@ -70,10 +68,11 @@ export default function MemberCard({
             flex items-center justify-center
             text-white text-3xl
             font-bold
+            btn-bounce
           "
         >
           +
-        </motion.button>
+        </button>
       </div>
     </div>
   );

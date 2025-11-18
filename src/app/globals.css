@@ -537,3 +537,10 @@ body {
   margin-right: 0 !important;
 }
 
+.btn-bounce {
+  transition: transform 0.08s ease-out;
+}
+
+.btn-bounce:active {
+  transform: scale(0.75);
+}
