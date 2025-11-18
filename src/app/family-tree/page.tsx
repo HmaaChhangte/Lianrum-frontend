@@ -2,24 +2,28 @@
 
 import { useState, useRef, useEffect } from "react";
 import { SignOutButton } from "@clerk/nextjs";
+import MemberCard from "@/components/member-card";
 
 export default function FamilyTreePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Zoom + Pan
-  const treeRef = useRef(null);
+  const treeRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const isDragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
 
   // Drag movement
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
-    dragStart.current = { x: e.clientX - position.x, y: e.clientY - position.y };
+    dragStart.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging.current) {
       setPosition({
         x: e.clientX - dragStart.current.x,
@@ -33,7 +37,7 @@ export default function FamilyTreePage() {
   };
 
   // Scroll zoom
-  const handleWheel = (e) => {
+  const handleWheel = (e: WheelEvent) => {
     e.preventDefault();
     let newScale = scale - e.deltaY * 0.001;
     newScale = Math.min(Math.max(newScale, 0.6), 2.0);
@@ -42,6 +46,7 @@ export default function FamilyTreePage() {
 
   useEffect(() => {
     const tree = treeRef.current;
+    if (!tree) return;
     tree.addEventListener("wheel", handleWheel, { passive: false });
     return () => tree.removeEventListener("wheel", handleWheel);
   }, [scale]);
@@ -56,9 +61,7 @@ export default function FamilyTreePage() {
         backgroundPosition: "center",
       }}
     >
-      {/* ===========================
-         TOP BAR
-      ============================ */}
+      {/* TOP BAR */}
       <div
         style={{
           width: "100%",
@@ -77,11 +80,7 @@ export default function FamilyTreePage() {
         <h2 style={{ fontWeight: "bold", color: "#3f2b15" }}>🌸 Family Tree</h2>
 
         <div
-          style={{
-            fontSize: "30px",
-            cursor: "pointer",
-            padding: "5px",
-          }}
+          style={{ fontSize: "30px", cursor: "pointer", padding: "5px" }}
           onClick={() => setMenuOpen(true)}
         >
           ☰
@@ -90,9 +89,7 @@ export default function FamilyTreePage() {
 
       <div style={{ height: "80px" }} />
 
-      {/* ===========================
-         ZOOM + PAN TREE AREA
-      ============================ */}
+      {/* ZOOM + PAN AREA */}
       <div
         ref={treeRef}
         onMouseDown={handleMouseDown}
@@ -116,25 +113,21 @@ export default function FamilyTreePage() {
             position: "relative",
           }}
         >
-          {/* ===== SAMPLE NODES (replace later) ===== */}
-          <FamilyNode x={900} y={100} name="Grandpa" emoji="🧓" />
-          <FamilyNode x={1100} y={100} name="Grandma" emoji="👵" />
-
-          <Connector x1={960} y1={200} x2={780} y2={350} />
-          <Connector x1={1140} y1={200} x2={1300} y2={350} />
-
-          <FamilyNode x={750} y={360} name="Dad" emoji="👨" />
-          <FamilyNode x={1280} y={360} name="Mom" emoji="👩" />
-
-          <Connector x1={920} y1={460} x2={920} y2={620} />
-
-          <FamilyNode x={850} y={630} name="You" emoji="🧒" />
+          {/* ============ L I A N R U M A   G R A N D F A T H E R  ============ */}
+          <MemberCard
+            name="Lianruma Grandfather"
+            photoUrl={null}
+            isCouple={false}
+            onAddSpouse={() =>
+              alert("Add spouse for Lianruma Grandfather clicked")
+            }
+            onAddChild={() => {}}
+            styleOverride={{ x: 900, y: 100 }}
+          />
         </div>
       </div>
 
-      {/* ===========================
-         FLOATING MENU
-      ============================ */}
+      {/* MENU */}
       {menuOpen && (
         <>
           <div
@@ -149,6 +142,7 @@ export default function FamilyTreePage() {
               zIndex: 99,
             }}
           />
+
           <div
             style={{
               position: "fixed",
@@ -191,71 +185,7 @@ export default function FamilyTreePage() {
   );
 }
 
-/* ===========================
-   KAWAII NODE COMPONENT
-=========================== */
-function FamilyNode({ x, y, name, emoji }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left: x,
-        top: y,
-        transform: "translate(-50%, -50%)",
-        background: "#fff7e6",
-        border: "4px solid #be8b5f",
-        padding: "15px 20px",
-        borderRadius: "20px",
-        textAlign: "center",
-        boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
-        animation: "floaty 3s ease-in-out infinite",
-      }}
-    >
-      <div style={{ fontSize: "40px" }}>{emoji}</div>
-      <div style={{ fontWeight: "bold", fontSize: "18px", color: "#3f2b15" }}>
-        {name}
-      </div>
-
-      <style>
-        {`
-        @keyframes floaty {
-          0% { transform: translate(-50%, -50%) translateY(0); }
-          50% { transform: translate(-50%, -50%) translateY(-10px); }
-          100% { transform: translate(-50%, -50%) translateY(0); }
-        }
-        `}
-      </style>
-    </div>
-  );
-}
-
-/* ===========================
-   CONNECTOR LINES
-=========================== */
-function Connector({ x1, y1, x2, y2 }) {
-  return (
-    <svg
-      style={{ position: "absolute", left: 0, top: 0 }}
-      width="2000"
-      height="2000"
-    >
-      <line
-        x1={x1}
-        y1={y1}
-        x2={x2}
-        y2={y2}
-        stroke="#be8b5f"
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-/* ===========================
-   MENU ITEM
-=========================== */
-function MenuItem({ label, href }) {
+function MenuItem({ label, href }: { label: string; href: string }) {
   return (
     <div
       onClick={() => (window.location.href = href)}
