@@ -544,3 +544,38 @@ body {
 .btn-bounce:active {
   transform: scale(0.75);
 }
+/* Cute member card background (NO PNG) */
+.member-card-bg {
+  background: linear-gradient(to bottom, #aee1f6 0%, #f7d4b1 50%, #c8e6a1 100%);
+  position: relative;
+}
+
+/* Cartoon cloud effect top */
+.member-card-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, #fff 0%, rgba(255,255,255,0) 40%),
+              radial-gradient(circle at 80% 25%, #fff 0%, rgba(255,255,255,0) 40%);
+  opacity: 0.45;
+}
+
+/* Cartoon hills */
+.member-card-bg::after {
+  content: "";
+  position: absolute;
+  bottom: 35%;
+  left: -10%;
+  width: 120%;
+  height: 50%;
+  background: radial-gradient(circle at 50% 100%, #8ecb7a 0%, #6ea85c 70%, transparent 71%);
+  opacity: 0.95;
+}
+
+/* Button animation */
+.btn-bounce {
+  transition: transform 0.08s ease-out;
+}
+.btn-bounce:active {
+  transform: scale(0.75);
+}

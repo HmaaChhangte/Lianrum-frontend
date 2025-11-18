@@ -24,18 +24,10 @@ export default function MemberCard({
         overflow-hidden 
         shadow-xl 
         border-[4px] border-white
+        member-card-bg
       "
     >
-      {/* FULL BACKGROUND */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/member-card-bg.png')",
-          backgroundSize: "cover",
-        }}
-      />
-
-      {/* TOP SECTION (Avatar) */}
+      {/* TOP SECTION */}
       <div className="relative z-10 h-[55%] w-full flex justify-center items-center pt-4">
         <div
           className="
@@ -56,13 +48,14 @@ export default function MemberCard({
         </div>
       </div>
 
-      {/* BOTTOM SECTION (Green area + text + button) */}
+      {/* BOTTOM SECTION */}
       <div
         className="
           relative 
           z-10 
           h-[45%] w-full 
-          bg-[#8EB590]/90 
+          bg-[#8EB590] 
+          bg-opacity-90 
           flex flex-col items-center justify-center 
           px-2
         "
@@ -71,7 +64,6 @@ export default function MemberCard({
           {name}
         </p>
 
-        {/* Add Button */}
         <button
           onClick={() => {
             if (isCouple) onAddChild();
@@ -84,7 +76,7 @@ export default function MemberCard({
             bg-[#4CD137] 
             shadow-md
             flex items-center justify-center
-            text-white text-3xl
+            text-white text-4xl
             font-bold
             btn-bounce
           "
